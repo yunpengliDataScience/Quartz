@@ -7,16 +7,16 @@
 	<packaging>war</packaging>
 	<name>Quartz</name>
 
-	 <properties>
-		<servlet.version>2.5</servlet.version>
+	<properties>
+		<servlet.version>3.1.0</servlet.version>
 		<quartz.version>2.2.1</quartz.version>
 		<slf4j.version>1.7.5</slf4j.version>
 	</properties>
-	
+
 	<dependencies>
 		<dependency>
 			<groupId>javax.servlet</groupId>
-			<artifactId>servlet-api</artifactId>
+			<artifactId>javax.servlet-api</artifactId>
 			<version>${servlet.version}</version>
 			<scope>provided</scope>
 		</dependency>
