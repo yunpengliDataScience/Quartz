@@ -6,3 +6,6 @@ http://www.quartz-scheduler.org/
 Configure Quartz in Java Servlet Environment: 
 http://stackoverflow.com/questions/19573457/simple-example-for-quartz-2-2-and-tomcat-7
 http://www.mkyong.com/jsf2/jsf-2-quartz-2-example/
+
+Cron Expression Generator:
+http://www.cronmaker.com/
