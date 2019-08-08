@@ -1,18 +1,19 @@
 package org.dragon.yunpeng.quartz.jobs;
 
-import org.apache.log4j.Logger;
-import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
+import org.springframework.scheduling.quartz.QuartzJobBean;
 
-public class MyJob implements Job {
+public class MyJob extends QuartzJobBean {
+  private MyTask myTask;
 
-	private static final Logger logger = Logger.getLogger(MyJob.class);
-	@Override
-	public void execute(JobExecutionContext ctx) throws JobExecutionException {
+  public void setMyTask(MyTask myTask) {
+    this.myTask = myTask;
+  }
 
-		System.out.println("Executing MyJob......");
-		logger.info("Executing MyJob......");
-	}
+  @Override
+  protected void executeInternal(JobExecutionContext context) throws JobExecutionException {
+    myTask.executeTask();
+  }
 
 }

@@ -1,0 +1,61 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+
+	<bean id="myTask" class="org.dragon.yunpeng.quartz.jobs.MyTask">
+		<property name="myService" ref="myService"/>
+	</bean>
+
+	<!-- Spring Quartz -->
+	<bean name="myJob" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+
+		<property name="jobClass" value="org.dragon.yunpeng.quartz.jobs.MyJob" />
+
+		<property name="jobDataMap">
+			<map>
+				<entry key="myTask" value-ref="myTask" />
+			</map>
+		</property>
+		
+		<property name="durability" value="true" />
+
+	</bean>
+
+	<!-- <bean id="runMeJob" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean"> 
+		<property name="targetObject" ref="runMeTask" /> <property name="targetMethod" 
+		value="printMe" /> </bean> -->
+
+	<!-- Simple Trigger, run every 5 seconds -->
+	<bean id="simpleTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerFactoryBean">
+
+		<property name="jobDetail" ref="myJob" />
+		<property name="repeatInterval" value="5000" />
+		<property name="startDelay" value="1000" />
+
+	</bean>
+
+	<!-- Cron Trigger, run every 1 minute -->
+	<bean id="cronTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+
+		<property name="jobDetail" ref="myJob" />
+		<property name="cronExpression" value="0/59 * * * * ?" />
+
+	</bean>
+
+	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="jobDetails">
+			<list>
+				<ref bean="myJob" />
+			</list>
+		</property>
+
+		<property name="triggers">
+			<list>
+				<ref bean="cronTrigger" />
+			</list>
+		</property>
+	</bean>
+
+</beans>

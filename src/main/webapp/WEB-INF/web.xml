@@ -5,8 +5,24 @@
 	http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	id="WebApp_ID" version="2.5">
 
- <!-- Welcome page -->
-  <welcome-file-list>
-    <welcome-file>home.html</welcome-file>
-  </welcome-file-list>
+	<!-- Welcome page -->
+	<welcome-file-list>
+		<welcome-file>home.html</welcome-file>
+	</welcome-file-list>
+
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>
+			classpath:spring/applicationContext.xml
+			classpath:spring/spring-quartz.xml
+		</param-value>
+	</context-param>
+	
+	<!-- for loading Spring when application starting up -->
+	<listener>
+		<listener-class>
+			org.springframework.web.context.ContextLoaderListener
+		</listener-class>
+	</listener>
+		
 </web-app>
